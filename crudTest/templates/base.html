@@ -1,0 +1,70 @@
+{% extends "bootstrap/base.html" %}
+{% block styles %}
+    {{  super()  }}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script >
+        $(document).ready(function(){    
+            var messages = "{{ get_flashed_messages() }}";
+            if (typeof messages != 'undefined' && messages != '[]') 
+            {
+                $("#flashModal").modal();
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block title %}CRUD Test{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand text-info" href="{{ url_for('index') }}"><i class="fab fa-blackberry"></i>CRUD Test</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <button class="btn btn-dark border-info col-2" type="button" id="bOpenForm" data-toggle="modal" data-target="#formModal">
+                <i class="fas fa-plus"></i>
+                Додати
+            </button>
+        
+            <button class="btn btn-dark border-info col-2" type="button" id="bOpenForm" data-toggle="collapse" data-target="#filterFormCollapse">
+                <i class="fas fa-filter"></i>
+                Фільтр
+            </button>
+        </div>
+    </nav>
+
+    <!-- Flash Modal -->
+    <div id="flashModal" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    <div class="modal-header">
+                        <h4 class="modal-title">Видалено</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        {% if messages %}
+                            {% for message in messages %}
+                                {{ message[1] }} <br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+
+    {% block contentBase %} {% endblock %}
+</div>
+{% endblock %}

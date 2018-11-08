@@ -1,0 +1,67 @@
+<table class="table table-hover table-dark table-bordered table-striped" id="table">
+    <thead>
+        <tr class="bg-info">
+            <th scope="col">#</th>
+            <th scope="col">Ім'я</th>
+            <th scope="col">Текст</th>
+            <th scope="col">Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% macro tCell(cellName) %}
+        <td>{{ cellName }}</td>
+        {% endmacro %}
+
+        {% set l = list(data) %}
+        {% for i in range(0, l.__len__()) %}
+        <tr data-href="{{ l[i]['_id'] }}">
+            <th class="bg-info" scope="row">{{ i + 1 }}</th>
+
+            {{ tCell(l[i]["name"]) }}
+            {{ tCell(l[i]["text"]) }}
+            {%if l[i].date %}
+                {{ tCell(l[i]["date"].strftime('%d.%m.%Y %H:%M:%S')) }}
+            {% else %}
+            <td></td>
+            {%endif%}
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr class="bg-info">
+            <th scope="col">#</th>
+            <th scope="col">Ім'я</th>
+            <th scope="col">Текст</th>
+            <th scope="col">Дата</th>
+        </tr>
+    </tfoot>
+</table>
+
+<div id="paginationContainer" class="form-inline">
+
+        <label>Рядків на сторінці</label>
+
+        <select class="form-control border-info" id="rowsPerPage">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="0">Усі разом</option>
+        </select>     
+        
+        <div id="pages" class='border-info'>
+            <a class="btn btn-outline-info" href="{{ paginator.urlFirst() }}" role="button" d="btnFirst">
+                <i class="fas fa-fast-backward"></i>
+            </a>
+            <a class="btn btn-outline-info" href="{{ paginator.urlPrev() }}" role="button" id="btnPrev">
+                <i class="fas fa-step-backward"></i></i>
+            </a>
+            <input type="number" class="form-control border-info" step="1" min="1" value="1" id="recordOffset">
+            <a class="btn btn-outline-info" href="{{ paginator.urlNext() }}" role="button" id="btnNext">
+                <i class="fas fa-step-forward"></i>
+            </a>
+            <a class="btn btn-outline-info" href="{{ paginator.urlLast() }}"role="button" id="btnLast">
+                <i class="fas fa-fast-forward"></i>
+            </a>
+        </div>
+        <label></label>Загальна кількість записів по Вашому запиту: </label> <label>{{ paginator.recordsCount }}</label>
+    </div>

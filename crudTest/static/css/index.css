@@ -1,0 +1,54 @@
+#formErrorsContainer {
+    display: none;
+}
+
+#formErrors ul {
+    list-style: none;
+  }
+
+#tableId {
+    max-width: 100%;
+}
+  
+tbody{
+    color: #17a2b8;
+}
+
+nav button { 
+    color: #17a2b8 !important;
+}
+
+nav button:hover{
+    background-color: #565e67 !important;
+}
+
+thead, tfoot,  th[scope=row]  {
+    color: #212529 !important
+}
+
+#paginationContainer select, #paginationContainer input {
+    max-width: 70px;
+}
+
+#paginationContainer div{
+    margin-right: 20px;
+}
+#paginationContainer select {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.card, .btn, .form-control { border-radius: 0; }
+
+.disabledbutton {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+#table > tbody > tr > th {
+    width: 60px;
+}
+
+#formСonfirmation, #delButton {
+    display: none;
+}

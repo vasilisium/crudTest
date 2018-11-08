@@ -1,0 +1,12 @@
+{
+    "python.pythonPath": "${workspaceFolder}\\env\\Scripts\\python.exe",
+    "todohighlight.include": [
+        "**/*.js",
+        "**/*.html",
+        "**/*.css",
+        "**/*.py"
+    ],
+    "todohighlight.exclude": [
+        "**/env/**"
+    ]
+}
